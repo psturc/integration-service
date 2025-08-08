@@ -125,6 +125,10 @@ test: manifests generate fmt vet envtest download-crds ## Run tests.
 build: generate fmt vet ## Build manager binary.
 	go build -o bin/manager cmd/main.go
 
+.PHONY: build-cover
+build-cover: generate fmt vet ## Build manager binary.
+	go build -cover -covermode=atomic -o bin/manager cmd/main.go
+
 .PHONY: run
 run: manifests generate fmt vet ## Run a controller from your host.
 	go run ./cmd/main.go
